@@ -11,7 +11,7 @@ export default defineConfig({
     plugins: [
         ...VitePluginNode({
             adapter: 'express',
-            appPath: './src/app.ts'
+            appPath: './src/index.ts'
         })
     ],
     optimizeDeps: {

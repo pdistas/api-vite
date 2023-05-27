@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 
 const app = express()
 
@@ -6,10 +7,7 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-if (import.meta.env.PROD) {
-    app.listen(3000, () => {
-        console.log("Server running on port 3000");
-    });
-}
+app.use(express.json());
+app.use(cors({ origin: "*" }))
 
-export const viteNodeApp = app;
+export default app;
