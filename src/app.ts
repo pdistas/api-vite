@@ -1,13 +1,33 @@
-import express from 'express'
+import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 
-const app = express()
+class App {
+    public app: Application;
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+    constructor() {
+        this.app = express();
+        this.config();
+        this.routes();
+        this.errorHandler();
+    }
 
-app.use(express.json());
-app.use(cors({ origin: "*" }))
+    private config(): void {
+        this.app.use(express.json());
+        this.app.use(cors());
+    }
 
-export default app;
+    private routes(): void {
+        this.app.get("/", (req, res) => {
+            res.send("Hello World!");
+        });
+    }
+
+    private errorHandler(): void {
+        this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+            console.error(err.stack);
+            res.status(500).json({ message: 'Internal Server Error' });
+        });
+    }
+}
+
+export default new App().app;
