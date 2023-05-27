@@ -1,5 +1,8 @@
 import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
+import frutas from './routes/frutas'
+import user from './routes/user'
+import index from './routes/index'
 
 class App {
     public app: Application;
@@ -20,6 +23,10 @@ class App {
         this.app.get("/", (req, res) => {
             res.send("Hello World!");
         });
+
+        this.app.use("/", index);
+        this.app.use("/user", user);
+        this.app.use("/frutas", frutas);
     }
 
     private errorHandler(): void {
