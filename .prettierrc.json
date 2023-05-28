@@ -1,0 +1,14 @@
+{
+  "tabWidth": 2,
+  "endOfLine": "lf",
+  "semi": true,
+  "useTabs": false,
+  "singleQuote": false,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "printWidth": 80,
+  "embeddedLanguageFormatting": "auto",
+  "quoteProps": "as-needed",
+  "plugins": ["eslint-plugin-prettier"]
+}

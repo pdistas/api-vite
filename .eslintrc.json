@@ -1,0 +1,95 @@
+{
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "no-duplicate-case": "error",
+    "no-fallthrough": "error",
+    "no-unreachable": "error",
+    "camelcase": "error",
+    "array-bracket-newline": ["error", "consistent"],
+    "class-methods-use-this": "error",
+    "arrow-spacing": "warn",
+    "comma-dangle": ["warn", "never"],
+    "eqeqeq": "warn",
+    "no-eval": "error",
+    "no-invalid-regexp": "error",
+    "consistent-return": "error",
+    "consistent-this": ["error", "self"],
+    "no-empty": "error",
+    "no-unused-vars": "warn",
+    "no-use-before-define": "warn",
+    "no-useless-call": "error",
+    "no-var": "error",
+    "dot-location": ["error", "property"],
+    "func-call-spacing": ["warn", "never"],
+    "new-parens": "error",
+    "use-isnan": "error",
+    "no-new-wrappers": "error",
+    "no-undef": "error",
+    "no-undef-init": "warn",
+    "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],
+    "keyword-spacing": ["warn", { "before": true, "after": true }],
+    "object-curly-spacing": ["warn", "always"],
+    "block-spacing": ["warn", "always"],
+    "curly": ["warn", "multi-or-nest", "consistent"],
+    "array-bracket-spacing": ["warn", "never", {
+      "objectsInArrays": false,
+      "arraysInArrays": false,
+      "singleValue": false
+    }],
+    "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+    "no-underscore-dangle": "error",
+    "no-useless-escape": "warn",
+    "prefer-const": "warn",
+    "prefer-arrow-callback": "warn",
+    "prefer-template": "warn",
+    "comma-spacing": ["warn", { "before": false, "after": true }],
+    "no-nested-ternary": "error",
+    "id-blacklist": ["error", "data", "e", "cb", "callback", "fon", "val"],
+    "no-implied-eval": "error",
+    "no-const-assign": "error",
+    "no-extra-semi": "warn",
+    "no-extra-boolean-cast": "warn",
+    "no-extra-parens": "warn",
+    "no-new-func": "error",
+    "no-new-require": "error",
+    "no-new-symbol": "error",
+    "no-return-await": "warn",
+    "no-labels": "error",
+    "no-with": "error",
+    "arrow-parens": ["warn", "always"],
+    "no-catch-shadow": "error",
+    "switch-colon-spacing": ["warn", { "after": true, "before": false }],
+    "no-trailing-spaces": "warn",
+    "spaced-comment": ["warn", "always"],
+    "no-sequences": "error",
+    "no-unneeded-ternary": "warn",
+    "no-useless-concat": "warn",
+    "no-useless-return": "warn"
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "coverage/", "test/"],
+  "overrides": [
+    {
+      "files": ["*.d.ts"],
+      "rules": {
+        "spaced-comment": "off"
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
+}
