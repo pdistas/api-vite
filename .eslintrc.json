@@ -41,11 +41,15 @@
     "object-curly-spacing": ["warn", "always"],
     "block-spacing": ["warn", "always"],
     "curly": ["warn", "multi-or-nest", "consistent"],
-    "array-bracket-spacing": ["warn", "never", {
-      "objectsInArrays": false,
-      "arraysInArrays": false,
-      "singleValue": false
-    }],
+    "array-bracket-spacing": [
+      "warn",
+      "never",
+      {
+        "objectsInArrays": false,
+        "arraysInArrays": false,
+        "singleValue": false
+      }
+    ],
     "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
     "no-underscore-dangle": "error",
     "no-useless-escape": "warn",
