@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "rvest.vs-code-prettier-eslint",
     "christian-kohler.npm-intellisense",
-    "traBpUkciP.vscode-npm-scripts"
+    "traBpUkciP.vscode-npm-scripts",
+    "usernamehw.errorlens"
   ]
 }
