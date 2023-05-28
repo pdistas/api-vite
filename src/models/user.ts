@@ -18,7 +18,8 @@ export class User {
     if (
       now.getMonth() < this.birth.getMonth() &&
       now.getDay() < this.birth.getDay()
-    ) return age - 1;
+    )
+      return age - 1;
 
     return age;
   }
