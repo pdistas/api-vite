@@ -1,0 +1,30 @@
+[
+  {
+    "name": "maçã",
+    "price": 2.50,
+    "variety": "fuji",
+    "color": "vermelha",
+    "type": "tropical"
+  },
+  {
+    "name": "banana",
+    "price": 1.50,
+    "variety": "nanica",
+    "color": "amarela",
+    "type": "tropical"
+  },
+  {
+    "name": "laranja",
+    "price": 3.50,
+    "color": "laranja",
+    "variety": "pera",
+    "type": "cítrica"
+  },
+  {
+    "name": "uva",
+    "price": 5.50,
+    "color": "roxa",
+    "variety": "niágara",
+    "type": "tropical"
+  }
+]
