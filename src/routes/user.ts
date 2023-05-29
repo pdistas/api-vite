@@ -9,9 +9,9 @@ router.get("/:username", (req, res) => {
   res.json({ username: user.username, email: user.email });
 });
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   const { username, email, password, birth } = req.body;
-  const createdUser = userControl.add({ username, email, password, birth });
+  const createdUser = await userControl.add({ username, email, password, birth });
 
   res.cookie("username", createdUser.username);
   res.status(201).send("User created successfully");
@@ -27,7 +27,7 @@ router.get("/whoami", (req, res) => {
   }
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username) {
@@ -40,7 +40,7 @@ router.post("/login", (req, res) => {
     return;
   }
 
-  if (userControl.checkPassword(username, password)) {
+  if (await userControl.checkPassword(username, password)) {
     res.cookie("username", username);
     res.send("Logged in successfully");
   } else {
@@ -48,7 +48,7 @@ router.post("/login", (req, res) => {
   }
 });
 
-router.patch("/update", (req, res) => {
+router.patch("/update",async (req, res) => {
   const { username } = req.cookies;
   const { password, newUser } = req.body;
 
@@ -62,7 +62,7 @@ router.patch("/update", (req, res) => {
     return;
   }
 
-  if (!userControl.checkPassword(username, password)) {
+  if (!await userControl.checkPassword(username, password)) {
     res.status(403).send("Incorrect password");
     return;
   }

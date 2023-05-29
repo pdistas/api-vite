@@ -1,11 +1,11 @@
 import users from "../data/users.json";
+import * as crypt from "../crypt";
 
 type User = (typeof users)[number];
 
 export function getID(username: string): number {
   const index = users.findIndex((user) => user.username === username);
   if (index < 0) throw new Error("User not found");
-
   return index;
 }
 
@@ -21,12 +21,13 @@ export function byUsername(username: string): User {
   return byID(index);
 }
 
-export function checkPassword(user: string, password: string): boolean {
+export async function checkPassword(user: string, password: string) {
   const userObj = byUsername(user);
-  return userObj.password === password;
+  return crypt.compare(password, userObj.password);
 }
 
-export function add(user: User): User {
+export async function add(user: User): Promise<User> {
+  user.password = await crypt.hash(user.password);
   users.push(user);
   return user;
 }
@@ -39,7 +40,9 @@ export function updateUser(
     throw new Error("Incorrect password");
 
   const index = getID(userInfo.username);
-  users[index] = user;
+
+  const userToUpdate = users[index];
+
 }
 
 export function deleteUser(userInfo: {
