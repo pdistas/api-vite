@@ -1,8 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import frutas from "./routes/frutas";
-import user from "./routes/user";
-import index from "./routes/index";
+import router from "./router";
 
 class App {
   public app: Application;
@@ -24,9 +22,7 @@ class App {
       res.send("Hello World!");
     });
 
-    this.app.use("/", index);
-    this.app.use("/user", user);
-    this.app.use("/frutas", frutas);
+    this.app.use(router);
   }
 
   private errorHandler(): void {
