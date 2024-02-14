@@ -1,6 +1,8 @@
-import express, { Application, Request, Response } from "express";
+import type { Application, ErrorRequestHandler, Router } from "express";
+import express from "express";
+import "express-async-errors";
 import cors from "cors";
-import router from "./router";
+import APIError from "./api_error";
 
 class App {
   public app: Application;
@@ -9,27 +11,49 @@ class App {
     this.app = express();
     this.config();
     this.routes();
-    this.errorHandler();
+    this.app.use(App.errorHandler);
   }
 
   private config(): void {
     this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      })
+    );
   }
 
   private routes(): void {
-    this.app.get("/", (_, res) => {
-      res.send("Hello World!");
+    const router = express.Router();
+
+    const routes = import.meta.glob("./routes/**/*.{ts,js}", {
+      eager: true
+    });
+
+    Object.entries(routes).forEach(([path, route]) => {
+      const routeModule = route as {
+        default: Router,
+        prefix?: string
+      };
+
+      const filePrefix =
+        routeModule.prefix ?? path.match(/^\.\/routes(.*?)(?:\/index)?\.(?:ts|js)$/)?.[1] ?? "";
+
+      router.use(filePrefix, routeModule.default);
     });
 
     this.app.use(router);
   }
 
-  private errorHandler(): void {
-    this.app.use((error: Error, _: Request, res: Response) => {
-      console.error(error.stack);
-      res.status(500).json({ message: "Internal Server Error" });
-    });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+  private static errorHandler: ErrorRequestHandler = (error, _, res, _next) => {
+    if (error instanceof APIError) {
+      error.writeResponse(res);
+    } else {
+      console.error(error)
+      res.status(500).send("Internal Server Error");
+    }
   }
 }
 
